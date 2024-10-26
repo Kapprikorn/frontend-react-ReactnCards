@@ -1,5 +1,59 @@
 .loginWrapper {
   background-color: #293842;
-  height: 500px;
-  width: 700px;
+  height: 400px;
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  gap: 32px;
+}
+
+.loginHeader {
+  height: 80px;
+  font-size: 64px;
+  color: #3DC100;
+  flex-grow: 1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+
+  width: 450px;
+  height: 233px;
+}
+
+.inputFieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inputField {
+  flex-grow: 1;
+  height: 60px;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding-left: 20px;
+  font-weight: 700;
+  font-size: 28px;
+
+  &::placeholder {
+    font-weight: 700;
+    font-size: 28px;
+    color: #1E1E1E;
+  }
 }
