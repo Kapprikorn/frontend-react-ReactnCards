@@ -1,0 +1,93 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height:            1.5;
+  accent-color:           #f60;
+  -webkit-font-smoothing: antialiased;
+}
+p, li, figcaption {
+  text-wrap: pretty;
+  max-width: 65ch;
+}
+
+/*
+  5. Improve media defaults
+*/
+img, picture, video, canvas, svg {
+  display:   block;
+  max-width: 100%;
+}
+
+/*
+  6. Remove built-in form typography styles
+*/
+input, button, textarea, select {
+  font: inherit;
+}
+
+/*
+  7. Avoid text overflows
+*/
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/*
+  8. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+/*
+  9. Giving multi-line headers a better feel
+*/
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+/*
+  11. Giving container queries a chance
+*/
+body > :is(header, main, footer), section, article {
+  container-type: inline-size;
+}
+
+/*
+  12. Tables, making them comprehensible
+*/
+:is(tbody, table) > tr:nth-child(odd) {
+  background: #0001; /* or #fff1 for dark themes */
+}
+
+td, th {
+  padding: 8px; /* or 0.5em 1em... or any value different from 0 */
+}
+
+/*
+  13. Accessibility
+*/
+@media (prefers-reduced-motion) {
+  *, *::before, *::after {
+    animation-duration: 0s !important;
+    /* additional recommendation */
+    transition:         none !important;
+    scroll-behavior:    auto !important;
+  }
+}
