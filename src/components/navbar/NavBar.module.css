@@ -1,0 +1,82 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  width: 100%;
+}
+
+.leftSection {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  height: 100%;
+  cursor: pointer;
+}
+
+.dropdownContainer {
+  position: relative;
+  height: 100%;
+  align-content: center;
+}
+
+.dropdownToggleButton {
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+}
+
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #293842;
+  /*box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.2);*/
+  box-shadow: rgba(0, 0, 0, 0.25) 0 25px 50px -12px;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  z-index: 10;
+
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 12px 12px 12px;
+}
+
+.dropdownContainer:hover .dropdownMenu,
+.dropdownContainer:focus-within .dropdownMenu {
+  display: flex;
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 12px 28px;
+  color: #fff;
+  background-color: #2f4b59;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdownItem:hover {
+  background-color: #2f5e5e;
+}
+
+.pageName {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.logoutButton {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
