@@ -1,0 +1,32 @@
+.buttonWrapper {
+  border: none;
+  line-height: 1;
+  border-radius: 8px;
+  padding: 16px 28px;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  color: #262f43;
+  width: 150px;
+  height: 60px;
+}
+
+.buttonWrapper.primary {
+  background-color: var(--color-primary);
+}
+
+.buttonWrapper.secondary {
+  background-color: var(--color-secondary);
+}
+
+.buttonWrapper:disabled {
+  cursor: not-allowed;
+}
+
+.buttonWrapper.primary:disabled {
+  background-color: #169326;
+}
+
+.buttonWrapper.secondary:disabled {
+  background-color: #AA972B;
+}
