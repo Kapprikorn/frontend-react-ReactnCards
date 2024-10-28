@@ -1,0 +1,118 @@
+.pageWrapper {
+  position: relative;
+  margin-top: 8px;
+  height: calc(100% - 8px);
+  border: 20px solid #192C38;
+  padding: 8px;
+
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+/* menu styling */
+.menuWrapper {
+  background-color: #263742;
+  flex: 1 1 650px;
+  border-radius: 12px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.playerCreditsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  & p {
+  }
+  .playerCredits {
+    flex: 1 0 0;
+
+    background-color: #1E2D38;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+}
+
+.playButtonsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.playButton {
+  width: 100%;
+}
+
+.bettingWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.betButton {
+  height: 90px;
+  width: 100%;
+}
+
+.betInputWrapper {
+  background-color: #2A3E4A;
+  width: 100%;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.betInputField {
+  background-color: #1E2D38;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  width: 150px;
+  color: #fff;
+
+  /* Firefox remove number arrows*/
+  -moz-appearance: textfield;
+  /* Chromium remove number arrows */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+}
+
+.betButtonWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.changeBetButton {
+  background-color: #6E8899;
+  width: unset;
+  height: unset;
+  padding: 12px 18px;
+}
+
+/* HiLo Game area */
+.gameAreaWrapper {
+  flex: 1 1 1160px;
+}
+
+.infoButton {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+}

@@ -31,9 +31,9 @@ function App() {
         </Routes>
       </main>
 
-      <footer className="footer-wrapper">
+      {/*<footer className="footer-wrapper">*/}
 
-      </footer>
+      {/*</footer>*/}
     </>
   );
 }
