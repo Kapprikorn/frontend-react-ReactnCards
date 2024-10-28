@@ -8,15 +8,5 @@
 .main-wrapper {
   background-color: rgba(0,0,0,0.1);
   overflow: auto;
-  height: 100%;
-}
-
-.main-content {
-  position: relative;
-  height: 100%;
-}
-
-
-.header-content, .main-content, .footer-content {
-  padding: 8px 16px;
+  flex-grow: 1;
 }
