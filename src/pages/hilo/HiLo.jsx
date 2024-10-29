@@ -1,6 +1,7 @@
 import styles from './HiLo.module.css';
 import Button from '../../components/button/Button.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useCards from '../../hooks/useCards.js';
 
 function HiLo() {
   const playerCredits = 10000;
@@ -14,6 +15,15 @@ function HiLo() {
   const halfBet = () => {
     setBetAmount(Math.ceil(betAmount / 2));
   };
+
+  const { card, getCard, error, loading } = useCards();
+
+  useEffect(() => {
+    getCard();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className={styles.pageWrapper}>
@@ -70,7 +80,29 @@ function HiLo() {
         </div>
       </div>
       <div className={styles.gameAreaWrapper}>
-
+        <div className={styles.cardPreviewWrapper}>
+          <div className={styles.playingCardPreview}>
+            <p>K</p>
+            <p className={styles.rotatedText}>|&lt;</p>
+          </div>
+          <p>King being the highest</p>
+        </div>
+        <div className={styles.playingCard}>
+          {
+            card &&
+            <img
+              src={card.cards[0].image}
+              alt={`${card.cards[0].value.toLowerCase()} of ${card.cards[0].suit.toLowerCase()}`}
+            />
+          }
+        </div>
+        <div className={styles.cardPreviewWrapper}>
+          <div className={styles.playingCardPreview}>
+            <p>A</p>
+            <p className={styles.rotatedTextReverse}>|&lt;</p>
+          </div>
+          <p>Ace being the lowest</p>
+        </div>
       </div>
       <Button
         text="i"
