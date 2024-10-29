@@ -3,6 +3,7 @@ import Button from '../../components/button/Button.jsx';
 import { useEffect } from 'react';
 import useCards from '../../hooks/useCards.js';
 import GameBettingView from '../../components/gameBettingView/GameBettingView.jsx';
+import PlayingCard from '../../components/playingCard/PlayingCard.jsx';
 
 function HiLo() {
 
@@ -42,15 +43,7 @@ function HiLo() {
           </div>
           <p>King being the highest</p>
         </div>
-        <div className={styles.playingCard}>
-          {
-            card &&
-            <img
-              src={card.cards[0].image}
-              alt={`${card.cards[0].value.toLowerCase()} of ${card.cards[0].suit.toLowerCase()}`}
-            />
-          }
-        </div>
+        <PlayingCard card={card} />
         <div className={styles.cardPreviewWrapper}>
           <div className={styles.playingCardPreview}>
             <p>A</p>

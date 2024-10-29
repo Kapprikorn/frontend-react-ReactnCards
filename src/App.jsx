@@ -7,7 +7,7 @@ import HiLo from './pages/hilo/HiLo.jsx';
 import Blackjack from './pages/blackjack/Blackjack.jsx';
 
 function App() {
-  let currentPage = 'HiLo';
+  let currentPage = 'Blackjack';
 
   return (
     <>
