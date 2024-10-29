@@ -1,20 +1,10 @@
 import styles from './HiLo.module.css';
 import Button from '../../components/button/Button.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useCards from '../../hooks/useCards.js';
+import GameBettingView from '../../components/gameBettingView/GameBettingView.jsx';
 
 function HiLo() {
-  const playerCredits = 10000;
-
-  const [betAmount, setBetAmount] = useState(10);
-
-  const doubleBet = () => {
-    setBetAmount(betAmount * 2);
-  };
-
-  const halfBet = () => {
-    setBetAmount(Math.ceil(betAmount / 2));
-  };
 
   const { card, getCard, error, loading } = useCards();
 
@@ -27,13 +17,7 @@ function HiLo() {
 
   return (
     <div className={styles.pageWrapper}>
-      <div className={styles.menuWrapper}>
-        <div className={styles.playerCreditsWrapper}>
-          <p>Total Credits</p>
-          <div className={styles.playerCredits}>
-            {playerCredits}
-          </div>
-        </div>
+      <GameBettingView>
         <div className={styles.playButtonsWrapper}>
           <Button
             text="Lower ↘"
@@ -49,36 +33,7 @@ function HiLo() {
             className={styles.playButton}
             handleClick={() => {}} />
         </div>
-        <div className={styles.bettingWrapper}>
-          <Button
-            text="Bet"
-            className={styles.betButton}
-            handleClick={() => {}} />
-          <div className={styles.betInputWrapper}>
-            <label>
-              Credits
-            </label>
-            <input
-              className={styles.betInputField}
-              onChange={(event) => {setBetAmount(+event.target.value);}}
-              type="number"
-              inputMode="numeric"
-              value={betAmount} />
-            <div className={styles.betButtonWrapper}>
-              <Button
-                text="½"
-                className={styles.changeBetButton}
-                color="gray"
-                handleClick={halfBet} />
-              <Button
-                text="2*"
-                className={styles.changeBetButton}
-                color="gray"
-                handleClick={doubleBet} />
-            </div>
-          </div>
-        </div>
-      </div>
+      </GameBettingView>
       <div className={styles.gameAreaWrapper}>
         <div className={styles.cardPreviewWrapper}>
           <div className={styles.playingCardPreview}>
