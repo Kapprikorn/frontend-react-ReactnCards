@@ -8,14 +8,14 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState('');
-  const { login, register, loading, error } = useNoviBackend();
+  const { login: loginCall, register: registerCall, loading, error } = useNoviBackend();
   const navigate = useNavigate();
 
   const handleRegister = async (event) => {
     event.preventDefault();
     setSuccess('');
     try {
-      await register(username, password);
+      await registerCall(username, password);
     } catch(err) {
       console.error('handleRegister error:', err);
     }
@@ -24,7 +24,7 @@ function Login() {
     event.preventDefault();
     setSuccess('');
     try {
-      await login(username, password);
+      await loginCall(username, password);
       navigate('/home');
     } catch (err) {
       console.error('handleLogin error:', err);

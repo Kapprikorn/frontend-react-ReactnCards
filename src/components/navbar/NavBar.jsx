@@ -3,9 +3,11 @@ import styles from './NavBar.module.css';
 
 import logo from '../../assets/React_n_Cards_logo.png';
 import Button from '../button/Button.jsx';
+import { useAuth } from '../../hooks/useAuth.js';
 
 function NavBar({ pageName }) {
   const navigate = useNavigate();
+  const { removeToken } = useAuth();
   // TODO: implement navigation and pageName logic.
 
   const handleNavigation = (path) => {
@@ -14,6 +16,7 @@ function NavBar({ pageName }) {
 
   const handleLogout = () => {
     // TODO: implement logout logic.
+    removeToken();
     handleNavigation('/');
   }
 

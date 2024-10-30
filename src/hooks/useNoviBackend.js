@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useAuth } from './useAuth.js';
 
 const useNoviBackend = () => {
-  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { storeToken, token } = useAuth();
 
   // Base URL for the Novi API
   const BASE_URL = 'https://api.datavortex.nl/reactncards';
@@ -45,7 +46,7 @@ const useNoviBackend = () => {
         'POST',
         { username, password }
       );
-      setToken(data.token);
+      storeToken(data.jwt);
       return data;
     } catch (err) {
       setError('Login failed: Please check your credentials.');
@@ -65,10 +66,6 @@ const useNoviBackend = () => {
     }
   };
 
-  const logout = () => {
-    setToken(null);
-  }
-
   const fetchUserData = async () => {
     try {
       return await _apiRequest('/user');
@@ -78,7 +75,7 @@ const useNoviBackend = () => {
     }
   };
 
-  return { login, register, logout, fetchUserData, loading, error };
+  return { login, register, fetchUserData, loading, error };
 };
 
 export default useNoviBackend;
