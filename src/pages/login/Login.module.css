@@ -1,7 +1,5 @@
 .loginWrapper {
   background-color: #293842;
-  height: 400px;
-  width: 500px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -21,13 +19,12 @@
 }
 
 form {
+  max-width: 450px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0;
-
-  width: 450px;
-  height: 233px;
+  gap: 20px;
 }
 
 .inputFieldWrapper {

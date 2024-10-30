@@ -18,3 +18,11 @@ body {
   height: 100dvh;
   width: 100dvw;
 }
+
+.errorMessage {
+  color: #D32F2F;
+}
+
+.successMessage {
+  color: #169326;
+}
