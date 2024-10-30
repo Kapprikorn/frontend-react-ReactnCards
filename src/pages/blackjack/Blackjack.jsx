@@ -5,7 +5,7 @@ import useCards from '../../hooks/useCards.js';
 import { useEffect } from 'react';
 import PlayingCard from '../../components/playingCard/PlayingCard.jsx';
 
-function Blackjack() {
+function Blackjack({ toggleOverview }) {
   const { card, getCard, error, loading } = useCards();
 
   useEffect(() => {
@@ -65,6 +65,7 @@ function Blackjack() {
         text="i"
         color="info"
         className={styles.infoButton}
+        handleClick={toggleOverview}
       />
     </div>
   );

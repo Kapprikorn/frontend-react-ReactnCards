@@ -5,7 +5,7 @@ import useCards from '../../hooks/useCards.js';
 import GameBettingView from '../../components/gameBettingView/GameBettingView.jsx';
 import PlayingCard from '../../components/playingCard/PlayingCard.jsx';
 
-function HiLo() {
+function HiLo({ toggleOverview }) {
 
   const { card, getCard, error, loading } = useCards();
 
@@ -56,6 +56,7 @@ function HiLo() {
         text="i"
         color="info"
         className={styles.infoButton}
+        handleClick={toggleOverview}
       />
     </div>
   );
