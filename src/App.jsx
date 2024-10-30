@@ -5,9 +5,16 @@ import Login from './pages/login/Login.jsx';
 import Home from './pages/home/Home.jsx';
 import HiLo from './pages/hilo/HiLo.jsx';
 import Blackjack from './pages/blackjack/Blackjack.jsx';
+import Overview from './components/overview/Overview.jsx';
+import { useState } from 'react';
 
 function App() {
   let currentPage = 'Blackjack';
+  let [isOverviewActive, setIsOverviewActive] = useState(false);
+
+  const toggleOverview = () => {
+    isOverviewActive = setIsOverviewActive(!isOverviewActive);
+  }
 
   return (
     <>
@@ -26,9 +33,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/hilo" element={<HiLo />} />
-          <Route path="/blackjack" element={<Blackjack />} />
+          <Route path="/hilo" element={<HiLo toggleOverview={toggleOverview}/>} />
+          <Route path="/blackjack" element={<Blackjack toggleOverview={toggleOverview}/>} />
         </Routes>
+        {isOverviewActive && <Overview toggleOverview={toggleOverview}/> }
       </main>
 
       {/*<footer className="footer-wrapper">*/}
