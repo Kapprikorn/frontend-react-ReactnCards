@@ -8,14 +8,12 @@ import { useAuth } from '../../hooks/useAuth.js';
 function NavBar({ pageName }) {
   const navigate = useNavigate();
   const { removeToken } = useAuth();
-  // TODO: implement navigation and pageName logic.
 
   const handleNavigation = (path) => {
     navigate(path);
   };
 
   const handleLogout = () => {
-    // TODO: implement logout logic.
     removeToken();
     handleNavigation('/');
   }
