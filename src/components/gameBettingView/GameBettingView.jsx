@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import styles from './GameBettingView.module.css';
 import Button from '../button/Button.jsx';
 
-function GameBettingView({ children }) {
+function GameBettingView({ children, betAmount, setBetAmount }) {
   const playerCredits = 10000;
-
-  const [betAmount, setBetAmount] = useState(10);
 
   const doubleBet = () => {
     setBetAmount(betAmount * 2);
