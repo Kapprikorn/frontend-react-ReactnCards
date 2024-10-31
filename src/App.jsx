@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import NavBar from './components/navbar/NavBar.jsx';
 import Login from './pages/login/Login.jsx';
 import Home from './pages/home/Home.jsx';
@@ -9,7 +9,8 @@ import Overview from './components/overview/Overview.jsx';
 import { useState } from 'react';
 
 function App() {
-  let currentPage = 'Blackjack';
+  const currentPagePath = useLocation().pathname;
+  const currentPage = currentPagePath.charAt(1).toUpperCase() + currentPagePath.slice(2);
   let [isOverviewActive, setIsOverviewActive] = useState(false);
 
   const toggleOverview = () => {
@@ -19,7 +20,7 @@ function App() {
   return (
     <>
       {
-        currentPage !== 'login' &&
+        currentPagePath !== '/' &&
         (
           <header className="header-wrapper">
             <NavBar
@@ -38,10 +39,6 @@ function App() {
         </Routes>
         {isOverviewActive && <Overview toggleOverview={toggleOverview}/> }
       </main>
-
-      {/*<footer className="footer-wrapper">*/}
-
-      {/*</footer>*/}
     </>
   );
 }
