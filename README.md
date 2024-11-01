@@ -1,6 +1,22 @@
-## React N' Cards
+# React N' Cards
 
 Welcome to my application. In this app users can play a total of two card games.
+
+## Table of Contents
+- [React N' Cards](#react-n-cards)
+   - [HiLo](#hilo)
+   - [Blackjack](#blackjack)
+   - [History](#history)
+- [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Run locally](#run-locally)
+- [Environment Variables](#environment-variables)
+- [Other NPM commands](#other-npm-commands)
+   - [Building for Production](#building-for-production)
+   - [Linting and Formatting](#linting-and-formatting)
+- [Test account](#test-account)
+- [Acknowledgements](#acknowledgements)
 
 ### HiLo
 
