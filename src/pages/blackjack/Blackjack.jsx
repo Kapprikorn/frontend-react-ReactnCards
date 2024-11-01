@@ -3,9 +3,9 @@ import GameBettingView from '../../components/gameBettingView/GameBettingView.js
 import Button from '../../components/button/Button.jsx';
 import useCards from '../../hooks/useCards.js';
 import { useEffect, useState } from 'react';
-import PlayingCard from '../../components/playingCard/PlayingCard.jsx';
 import getCardValue from '../../helpers/blackjackScoreTable.js';
 import { useCardContext } from '../../hooks/useCardContext.js';
+import HandDisplay from '../../components/handDisplay/HandDisplay.jsx';
 
 function Blackjack({ toggleOverview }) {
   const { getCards } = useCards();
@@ -194,7 +194,7 @@ function Blackjack({ toggleOverview }) {
   };
 
   return (
-    <div className={styles.pageWrapper}>
+    <section className={styles.pageWrapper}>
       <GameBettingView
         betAmount={betAmount}
         setBetAmount={handleSetBetAmount}
@@ -221,36 +221,24 @@ function Blackjack({ toggleOverview }) {
             handleClick={double} />
         </div>
       </GameBettingView>
-      <div className={styles.gameAreaWrapper}>
-        <div className={styles.boardWrapper}>
-          <div className={styles.scoreWrapper}>
-            <p>{dealerScore}</p>
-          </div>
-          <div className={styles.cardWrapper}>
-            {dealerHand.map((card, index) => (
-              <PlayingCard key={index} card={card.image} />
-            ))}
-          </div>
-        </div>
+      <article className={styles.gameAreaWrapper}>
+        <HandDisplay
+          hand={playerHand}
+          score={playerScore}
+        />
         {message && <p className={styles.message}>{message}</p>}
-        <div className={styles.boardWrapper}>
-          <div className={styles.scoreWrapper}>
-            <p>{playerScore}</p>
-          </div>
-          <div className={styles.cardWrapper}>
-            {playerHand.map((card, index) => (
-              <PlayingCard key={index} card={card.image} />
-            ))}
-          </div>
-        </div>
-      </div>
+        <HandDisplay
+          hand={dealerHand}
+          score={dealerScore}
+        />
+      </article>
       <Button
         text="i"
         color="info"
         className={styles.infoButton}
         handleClick={toggleOverview}
       />
-    </div>
+    </section>
   );
 }
 

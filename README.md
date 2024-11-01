@@ -78,6 +78,14 @@ Create a `.env` file in the root of this project (same height as src folder) and
 VITE_NOVI_BACKEND_API_KEY=https://api.example.com
 ```
 
+### Important!
+
+After setting up the environment variable, run a single build command.
+
+   ```sh
+   npm run build
+   ```
+
 ## Other NPM commands
 
 Other npm commands that can be used are as follows.
