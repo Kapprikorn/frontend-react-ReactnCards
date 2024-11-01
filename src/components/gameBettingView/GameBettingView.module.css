@@ -66,6 +66,9 @@
     margin: 0;
   }
 
+  &:disabled {
+    opacity: 50%;
+  }
 }
 
 .betButtonWrapper {
