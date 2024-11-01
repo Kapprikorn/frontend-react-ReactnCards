@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import NavBar from './components/navbar/NavBar.jsx';
 import Login from './pages/login/Login.jsx';
 import Home from './pages/home/Home.jsx';
@@ -34,8 +34,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/hilo" element={<HiLo toggleOverview={toggleOverview}/>} />
-          <Route path="/blackjack" element={<Blackjack toggleOverview={toggleOverview}/>} />
+          <Route path="/hilo" element={<HiLo toggleOverview={toggleOverview} />} />
+          <Route path="/blackjack" element={<Blackjack toggleOverview={toggleOverview} />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         {isOverviewActive && <Overview toggleOverview={toggleOverview}/> }
       </main>
