@@ -13,7 +13,8 @@ function HiLo({ toggleOverview }) {
   const [betAmount, setBetAmount] = useState(10); // Default starting bet amount
   const [balance, setBalance] = useState(100);
   const [betType, setBetType] = useState(null);
-  const [message, setMessage] = useState("");
+  const [isGameActive, setIsGameActive] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     drawNewCard();
@@ -26,10 +27,11 @@ function HiLo({ toggleOverview }) {
   const drawNewCard = async () => {
     setPreviousCard(card);
     await getCard();
-  }
+  };
 
   const handleBet = async (betButtonType) => {
     setBetType(betButtonType);
+    setMessage('');
     await drawNewCard();
   };
 
@@ -42,62 +44,79 @@ function HiLo({ toggleOverview }) {
       (betType === 'lower' && currentCardValue < previousCardValue) ||
       (betType === 'equal' && currentCardValue === previousCardValue)
     ) {
-      setBalance(balance + 10); // Winning bet
+      setBalance(balance + betAmount); // Winning bet
       setMessage(`You Won ${betAmount} credits! 🥳`);
-    } else {
-      setBalance(balance - 10); // Losing bet
+    }
+    else {
+      setBalance(balance - betAmount); // Losing bet
+      setIsGameActive(false);
       setMessage(`You Lost ${betAmount} credits`);
     }
-  }
+  };
 
   const handleSetBetAmount = (amount) => {
     setBetAmount(amount);
   };
 
-
   return (
     <div className={styles.pageWrapper}>
-      <GameBettingView betAmount={betAmount} setBetAmount={handleSetBetAmount}>
+      <GameBettingView
+        betAmount={betAmount}
+        setBetAmount={handleSetBetAmount}
+        isGameActive={isGameActive}
+        startGame={() => setIsGameActive(true)}>
         <div className={styles.playButtonsWrapper}>
           <Button
             text="Lower ↘"
+            disabled={!isGameActive}
             className={styles.playButton}
-            handleClick={ () => {handleBet('lower')} } />
+            handleClick={() => {handleBet('lower');}} />
           <Button
             text="Equals ="
+            disabled={!isGameActive}
             className={styles.playButton}
-            handleClick={ () => {handleBet('equal')} }
+            handleClick={() => {handleBet('equal');}}
             color="secondary" />
           <Button
             text="Higher ↗"
+            disabled={!isGameActive}
             className={styles.playButton}
-            handleClick={ () => {handleBet('higher')} } />
+            handleClick={() => {handleBet('higher');}} />
         </div>
       </GameBettingView>
       <div className={styles.gameAreaWrapper}>
-        <div className={styles.cardPreviewWrapper}>
-          <div className={styles.playingCardPreview}>
-            <p>K</p>
-            <p className={styles.rotatedText}>|&lt;</p>
+        <div className={styles.gameWrapper}>
+          <div className={styles.cardPreviewWrapper}>
+            <div className={styles.playingCardPreview}>
+              <p>K</p>
+              <p className={styles.rotatedText}>|&lt;</p>
+            </div>
+            <p>King being the highest</p>
           </div>
-          <p>King being the highest</p>
+          {
+            loading
+            ? (
+              <p>Loading...</p>
+            )
+            : error
+              ? (
+                <p>Error: {error}</p>
+              )
+              : (
+                <PlayingCard card={card} />
+              )
+          }
+          <div className={styles.cardPreviewWrapper}>
+            <div className={styles.playingCardPreview}>
+              <p>A</p>
+              <p className={styles.rotatedTextReverse}>|&lt;</p>
+            </div>
+            <p>Ace being the lowest</p>
+          </div>
         </div>
         {
-          loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p>Error: {error}</p>
-          ) : (
-            <PlayingCard card={card} />
-          )
+          message && <p>{message}</p>
         }
-        <div className={styles.cardPreviewWrapper}>
-          <div className={styles.playingCardPreview}>
-            <p>A</p>
-            <p className={styles.rotatedTextReverse}>|&lt;</p>
-          </div>
-          <p>Ace being the lowest</p>
-        </div>
       </div>
       <Button
         text="i"

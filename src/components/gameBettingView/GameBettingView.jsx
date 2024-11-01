@@ -1,7 +1,7 @@
 import styles from './GameBettingView.module.css';
 import Button from '../button/Button.jsx';
 
-function GameBettingView({ children, betAmount, setBetAmount }) {
+function GameBettingView({ children, betAmount, setBetAmount, isGameActive, startGame }) {
   const playerCredits = 10000;
 
   const doubleBet = () => {
@@ -25,14 +25,16 @@ function GameBettingView({ children, betAmount, setBetAmount }) {
       <div className={styles.bettingWrapper}>
         <Button
           text="Bet"
+          disabled={isGameActive}
           className={styles.betButton}
-          handleClick={() => {}} />
+          handleClick={startGame} />
         <div className={styles.betInputWrapper}>
           <label>
             Credits
           </label>
           <input
             className={styles.betInputField}
+            disabled={isGameActive}
             onChange={(event) => {setBetAmount(+event.target.value);}}
             type="number"
             inputMode="numeric"
@@ -40,11 +42,13 @@ function GameBettingView({ children, betAmount, setBetAmount }) {
           <div className={styles.betButtonWrapper}>
             <Button
               text="½"
+              disabled={isGameActive}
               className={styles.changeBetButton}
               color="gray"
               handleClick={halfBet} />
             <Button
               text="2*"
+              disabled={isGameActive}
               className={styles.changeBetButton}
               color="gray"
               handleClick={doubleBet} />

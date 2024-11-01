@@ -26,6 +26,15 @@
   padding: 20px;
 
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.gameWrapper {
+  width: 100%;
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;

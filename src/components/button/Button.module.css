@@ -13,10 +13,18 @@
 
 .buttonWrapper.primary {
   background-color: var(--color-primary);
+
+  &:disabled {
+    background-color: #169326;
+  }
 }
 
 .buttonWrapper.secondary {
   background-color: var(--color-secondary);
+
+  &:disabled {
+    background-color: #AA972B;
+  }
 }
 
 .buttonWrapper.info {
@@ -25,21 +33,21 @@
 
 .buttonWrapper.gray {
   background-color: #6E8899;
+
+  &:disabled {
+    background-color: #38444c;
+  }
 }
 
 .buttonWrapper.darkGray {
   background-color: #2A3E4A;
   color: #BECCE8;
+
+  &:disabled {
+    background-color: #192227;
+  }
 }
 
 .buttonWrapper:disabled {
   cursor: not-allowed;
-}
-
-.buttonWrapper.primary:disabled {
-  background-color: #169326;
-}
-
-.buttonWrapper.secondary:disabled {
-  background-color: #AA972B;
 }

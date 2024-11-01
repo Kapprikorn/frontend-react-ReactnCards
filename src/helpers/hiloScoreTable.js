@@ -1,5 +1,4 @@
 export default function getCardValue(card) {
-  console.log(card.cards[0].value);
   const cardRank = card.cards[0].value;
 
   switch (cardRank) {
