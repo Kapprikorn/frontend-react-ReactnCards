@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import useCards from '../../hooks/useCards.js';
 import { useCardContext } from '../../hooks/useCardContext.js';
 import GameBettingView from '../../components/gameBettingView/GameBettingView.jsx';
-import PlayingCard from '../../components/playingCard/PlayingCard.jsx';
 import getCardValue from '../../helpers/hiloScoreTable.js';
+import CardDisplay from '../../components/cardDisplay/CardDisplay.jsx';
 
 function HiLo({ toggleOverview }) {
   const { addHiLoCard } = useCardContext();
@@ -61,7 +61,7 @@ function HiLo({ toggleOverview }) {
   };
 
   return (
-    <div className={styles.pageWrapper}>
+    <section className={styles.pageWrapper}>
       <GameBettingView
         betAmount={betAmount}
         setBetAmount={handleSetBetAmount}
@@ -86,7 +86,7 @@ function HiLo({ toggleOverview }) {
             handleClick={() => {handleBet('higher');}} />
         </div>
       </GameBettingView>
-      <div className={styles.gameAreaWrapper}>
+      <article className={styles.gameAreaWrapper}>
         <div className={styles.gameWrapper}>
           <div className={styles.cardPreviewWrapper}>
             <div className={styles.playingCardPreview}>
@@ -95,21 +95,9 @@ function HiLo({ toggleOverview }) {
             </div>
             <p>King being the highest</p>
           </div>
-          {
-            loading
-            ? (
-              <p>Loading...</p>
-            )
-            : error
-              ? (
-                <p>Error: {error}</p>
-              )
-              : (
-                <div className={styles.playingCardWrapper}>
-                  <PlayingCard card={card}/>
-                </div>
-              )
-          }
+          <div className={styles.playingCardWrapper}>
+            <CardDisplay card={card} loading={loading} error={error} />
+          </div>
           <div className={styles.cardPreviewWrapper}>
             <div className={styles.playingCardPreview}>
               <p>A</p>
@@ -121,14 +109,14 @@ function HiLo({ toggleOverview }) {
         {
           message && <p>{message}</p>
         }
-      </div>
+      </article>
       <Button
         text="i"
         color="info"
         className={styles.infoButton}
         handleClick={toggleOverview}
       />
-    </div>
+    </section>
   );
 }
 
