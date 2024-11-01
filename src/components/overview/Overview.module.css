@@ -23,16 +23,27 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
+.gameWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 40%;
 }
 
 .cardsWrapper {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  gap: 8px;
   overflow-x: auto;
   scrollbar-width: auto;
-  scrollbar-color: #34495e #192C38;;
+  scrollbar-color: #34495e #192C38;
+  padding: 0 0 16px 0;
 
   &::-webkit-scrollbar {
     height: 40px;
@@ -56,6 +67,18 @@
   & * {
     flex-shrink: 0;
   }
+
+  /* Styles for card dimming */
+  & div:nth-child(1) img { filter: brightness(100%); opacity: 100%; }
+  & div:nth-child(2) img { filter: brightness(95%); opacity: 95%; }
+  & div:nth-child(3) img { filter: brightness(90%); opacity: 90%; }
+  & div:nth-child(4) img { filter: brightness(80%); opacity: 80%; }
+  & div:nth-child(5) img { filter: brightness(70%); opacity: 70%; }
+  & div:nth-child(6) img { filter: brightness(55%); opacity: 55%; }
+  & div:nth-child(7) img { filter: brightness(40%); opacity: 40%; }
+  & div:nth-child(8) img { filter: brightness(35%); opacity: 35%; }
+  & div:nth-child(9) img { filter: brightness(25%); opacity: 25%; }
+  & div:nth-child(10) img { filter: brightness(15%); opacity: 15%; }
 }
 
 .overviewInfoButton {

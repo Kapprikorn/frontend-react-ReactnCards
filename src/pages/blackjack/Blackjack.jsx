@@ -5,9 +5,11 @@ import useCards from '../../hooks/useCards.js';
 import { useEffect, useState } from 'react';
 import PlayingCard from '../../components/playingCard/PlayingCard.jsx';
 import getCardValue from '../../helpers/blackjackScoreTable.js';
+import { useCardContext } from '../../hooks/useCardContext.js';
 
 function Blackjack({ toggleOverview }) {
   const { getCards } = useCards();
+  const { addBlackjackCard } = useCardContext();
   const [playerHand, setPlayerHand] = useState([]);
   const [dealerHand, setDealerHand] = useState([]);
   const [playerScore, setPlayerScore] = useState(0);
@@ -52,6 +54,7 @@ function Blackjack({ toggleOverview }) {
 
       setPlayerHand(playerCards);
       setDealerHand(dealerCards);
+      cards.forEach(card => addBlackjackCard(card));
     } catch (err) {
       console.error("Error fetching cards.", err);
     }
@@ -60,7 +63,8 @@ function Blackjack({ toggleOverview }) {
   const drawNewCard = async () => {
     try {
       const cards = await getCards(1);
-      return cards[0]; // Adjusted to fetch the first card object
+      addBlackjackCard(cards[0]);
+      return cards[0];
     } catch (err) {
       console.error("Error drawing new cards.", err);
       return null;

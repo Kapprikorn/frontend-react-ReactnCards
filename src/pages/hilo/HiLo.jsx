@@ -2,12 +2,13 @@ import styles from './HiLo.module.css';
 import Button from '../../components/button/Button.jsx';
 import { useEffect, useState } from 'react';
 import useCards from '../../hooks/useCards.js';
+import { useCardContext } from '../../hooks/useCardContext.js';
 import GameBettingView from '../../components/gameBettingView/GameBettingView.jsx';
 import PlayingCard from '../../components/playingCard/PlayingCard.jsx';
 import getCardValue from '../../helpers/hiloScoreTable.js';
 
 function HiLo({ toggleOverview }) {
-
+  const { addHiLoCard } = useCardContext();
   const { card, getCard, error, loading } = useCards();
   const [previousCard, setPreviousCard] = useState(null);
   const [betAmount, setBetAmount] = useState(10); // Default starting bet amount
@@ -26,7 +27,8 @@ function HiLo({ toggleOverview }) {
 
   const drawNewCard = async () => {
     setPreviousCard(card);
-    await getCard();
+    const newCard = await getCard();
+    addHiLoCard(newCard);
   };
 
   const handleBet = async (betButtonType) => {
@@ -103,7 +105,9 @@ function HiLo({ toggleOverview }) {
                 <p>Error: {error}</p>
               )
               : (
-                <PlayingCard card={card} />
+                <div className={styles.playingCardWrapper}>
+                  <PlayingCard card={card}/>
+                </div>
               )
           }
           <div className={styles.cardPreviewWrapper}>
