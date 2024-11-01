@@ -13,6 +13,7 @@ const useCards = () => {
     try {
       const result = await axios.get('https://www.deckofcardsapi.com/api/deck/new/draw/?count=1');
       setCard(result.data);
+      return result.data;
     } catch (error) {
       console.error(error);
       setError(error.message);
