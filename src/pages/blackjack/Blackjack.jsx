@@ -223,13 +223,15 @@ function Blackjack({ toggleOverview }) {
       </GameBettingView>
       <article className={styles.gameAreaWrapper}>
         <HandDisplay
-          hand={playerHand}
-          score={playerScore}
+          hand={dealerHand}
+          score={dealerScore}
+          player="dealer"
         />
         {message && <p className={styles.message}>{message}</p>}
         <HandDisplay
-          hand={dealerHand}
-          score={dealerScore}
+          hand={playerHand}
+          score={playerScore}
+          player="player"
         />
       </article>
       <Button

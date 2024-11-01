@@ -9,10 +9,9 @@
 
 .scoreWrapper {
   background-color: #375365;
-  height: 32px;
-  width: 80px;
   border-radius: 20px;
   font-weight: bold;
+  padding: 10px 20px;
 
   display: flex;
   justify-content: center;
