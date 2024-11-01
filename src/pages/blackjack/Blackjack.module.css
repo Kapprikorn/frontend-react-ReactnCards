@@ -69,6 +69,10 @@
   }
 }
 
+.message {
+  margin: auto;
+}
+
 .infoButton {
   position: absolute;
   left: 20px;
