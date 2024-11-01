@@ -62,20 +62,11 @@ Create a `.env` file in the root of this project (same height as src folder) and
 VITE_NOVI_BACKEND_API_KEY=https://api.example.com
 ```
 
-### Test account
-
-To test things out there is already a test account added to the database
-
-```plaintext
-username: testUser
-password: testUser
-```
-
-### Other NPM commands
+## Other NPM commands
 
 Other npm commands that can be used are as follows.
 
-## Building for Production
+### Building for Production
 
 To create a production build of the project:
 
@@ -104,6 +95,15 @@ To lint the code and ensure it follows the defined ESLint rules:
    ```sh
    npm run lint
    ```
+
+### Test account
+
+To test things out there is already a test account added to the database
+
+```plaintext
+username: testUser
+password: testUser
+```
    
 ### Acknowledgements
 
