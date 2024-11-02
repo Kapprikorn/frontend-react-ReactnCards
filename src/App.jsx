@@ -1,21 +1,30 @@
 import './App.css';
-import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import NavBar from './components/navbar/NavBar.jsx';
 import Login from './pages/login/Login.jsx';
 import Home from './pages/home/Home.jsx';
 import HiLo from './pages/hilo/HiLo.jsx';
 import Blackjack from './pages/blackjack/Blackjack.jsx';
 import Overview from './components/overview/Overview.jsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuth } from './hooks/useAuth.js';
 
 function App() {
   const currentPagePath = useLocation().pathname;
   const currentPage = currentPagePath.charAt(1).toUpperCase() + currentPagePath.slice(2);
   let [isOverviewActive, setIsOverviewActive] = useState(false);
+  const { isTokenValid } = useAuth();
+  const navigate = useNavigate();
 
   const toggleOverview = () => {
     isOverviewActive = setIsOverviewActive(!isOverviewActive);
   }
+
+  useEffect(() => {
+    if (!isTokenValid()) {
+      navigate('/');
+    }
+  }, [isTokenValid, navigate]);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext(undefined);
 
@@ -17,8 +18,20 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
+  const isTokenValid = () => {
+    if (!token) return false;
+    try {
+      const decodeToken = jwtDecode(token);
+      const currentTime = Math.floor(Date.now() / 1000);
+      return decodeToken.exp > currentTime;
+    } catch (err) {
+      console.error("JWT token validation error: ", err);
+      return false;
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ token, storeToken, removeToken }}>
+    <AuthContext.Provider value={{ token, storeToken, removeToken, isTokenValid }}>
       {children}
     </AuthContext.Provider>
   );

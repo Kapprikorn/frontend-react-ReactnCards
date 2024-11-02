@@ -1,15 +1,23 @@
 import styles from './Login.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../components/button/Button.jsx';
 import useNoviBackend from '../../hooks/useNoviBackend.js';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth.js';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState('');
   const { login: loginCall, register: registerCall, loading, error } = useNoviBackend();
+  const { isTokenValid } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isTokenValid()) {
+      navigate('/home');
+    }
+  })
 
   const handleRegister = async (event) => {
     event.preventDefault();
