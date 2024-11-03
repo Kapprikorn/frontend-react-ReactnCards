@@ -1,8 +1,9 @@
 import styles from './HiLo.module.css';
-import Button from '../../components/button/Button.jsx';
 import { useEffect, useState } from 'react';
 import useCards from '../../hooks/useCards.js';
+import { usePlayer } from '../../hooks/usePlayer.js';
 import { useCardContext } from '../../hooks/useCardContext.js';
+import Button from '../../components/button/Button.jsx';
 import GameBettingView from '../../components/gameBettingView/GameBettingView.jsx';
 import getCardValue from '../../helpers/hiloScoreTable.js';
 import CardDisplay from '../../components/cardDisplay/CardDisplay.jsx';
@@ -10,9 +11,9 @@ import CardDisplay from '../../components/cardDisplay/CardDisplay.jsx';
 function HiLo({ toggleOverview }) {
   const { addHiLoCard } = useCardContext();
   const { card, getCard, error, loading } = useCards();
+  const { updateBalance } = usePlayer();
   const [previousCard, setPreviousCard] = useState(null);
   const [betAmount, setBetAmount] = useState(10); // Default starting bet amount
-  const [balance, setBalance] = useState(100);
   const [betType, setBetType] = useState(null);
   const [isGameActive, setIsGameActive] = useState(false);
   const [message, setMessage] = useState('');
@@ -46,11 +47,11 @@ function HiLo({ toggleOverview }) {
       (betType === 'lower' && currentCardValue < previousCardValue) ||
       (betType === 'equal' && currentCardValue === previousCardValue)
     ) {
-      setBalance(balance + betAmount); // Winning bet
+      updateBalance(betAmount); // Winning bet
       setMessage(`You Won ${betAmount} credits! 🥳`);
     }
     else {
-      setBalance(balance - betAmount); // Losing bet
+      updateBalance(-betAmount); // Losing bet
       setIsGameActive(false);
       setMessage(`You Lost ${betAmount} credits`);
     }
@@ -97,6 +98,9 @@ function HiLo({ toggleOverview }) {
           </div>
           <div className={styles.playingCardWrapper}>
             <CardDisplay card={card} loading={loading} error={error} />
+            {
+              message && <p>{message}</p>
+            }
           </div>
           <div className={styles.cardPreviewWrapper}>
             <div className={styles.playingCardPreview}>
@@ -106,9 +110,6 @@ function HiLo({ toggleOverview }) {
             <p>Ace being the lowest</p>
           </div>
         </div>
-        {
-          message && <p>{message}</p>
-        }
       </article>
       <Button
         text="i"

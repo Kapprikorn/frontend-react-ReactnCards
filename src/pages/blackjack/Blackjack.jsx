@@ -1,21 +1,22 @@
 import styles from './Blackjack.module.css';
+import { useEffect, useState } from 'react';
 import GameBettingView from '../../components/gameBettingView/GameBettingView.jsx';
 import Button from '../../components/button/Button.jsx';
 import useCards from '../../hooks/useCards.js';
-import { useEffect, useState } from 'react';
-import getCardValue from '../../helpers/blackjackScoreTable.js';
+import { usePlayer } from '../../hooks/usePlayer.js';
 import { useCardContext } from '../../hooks/useCardContext.js';
 import HandDisplay from '../../components/handDisplay/HandDisplay.jsx';
+import calculateHandScore from '../../helpers/calculateHandScore.js';
 
 function Blackjack({ toggleOverview }) {
   const { getCards } = useCards();
+  const { balance, updateBalance } = usePlayer();
   const { addBlackjackCard } = useCardContext();
   const [playerHand, setPlayerHand] = useState([]);
   const [dealerHand, setDealerHand] = useState([]);
   const [playerScore, setPlayerScore] = useState(0);
   const [dealerScore, setDealerScore] = useState(0);
   const [betAmount, setBetAmount] = useState(10);
-  const [balance, setBalance] = useState(100);
   const [message, setMessage] = useState("");
   const [isGameActive, setIsGameActive] = useState(false);
   const [isPlayerTurnActive, setIsPlayerTurnActive] = useState(false);
@@ -73,7 +74,7 @@ function Blackjack({ toggleOverview }) {
 
   const calculateScores = () => {
     const playerScore = calculateHandScore(playerHand);
-    const dealerScore = calculateHandScore(dealerHand);
+    const dealerScore = calculateHandScore(dealerHand, true, isPlayerTurnActive);
 
     setPlayerScore(playerScore);
     setDealerScore(dealerScore);
@@ -81,46 +82,25 @@ function Blackjack({ toggleOverview }) {
     if (playerScore > 21) {
       setIsGameActive(false);
       setMessage("Bust! You lose.");
-      setBalance(balance - betAmount);
+      updateBalance(-betAmount);
     } else if (playerScore === 21) {
       setIsGameActive(false);
       if (playerHand.length === 2) {
         setMessage("Blackjack! You win.");
-        setBalance(balance + betAmount * 1.5);
+        updateBalance(betAmount * 1.5);
       } else {
         setMessage("21! You win.");
-        setBalance(balance + betAmount);
+        updateBalance(betAmount);
       }
     } else if (dealerScore > 21) {
       setIsGameActive(false);
       setMessage("Dealer busts! You win.");
-      setBalance(balance + betAmount);
+      updateBalance(betAmount);
     } else if (dealerScore === 21) {
       setIsGameActive(false);
       setMessage("Dealer has 21! You lose.");
-      setBalance(balance - betAmount);
+      updateBalance(-betAmount);
     }
-  };
-
-  const calculateHandScore = (hand) => {
-    let score = 0;
-    let aceCount = 0;
-
-    hand.forEach(card => {
-      let value = getCardValue(card);
-      if (value === 1) {
-        aceCount += 1;
-        value = 11;
-      }
-      score += value;
-    });
-
-    while (aceCount > 0 && score > 21) {
-      score -= 10;
-      aceCount -= 1;
-    }
-
-    return score;
   };
 
   const hit = async () => {
@@ -176,15 +156,15 @@ function Blackjack({ toggleOverview }) {
 
     if (finalDealerScore > 21) {
       setMessage('Dealer busts! You win.');
-      setBalance(balance + betAmount);
+      updateBalance(betAmount);
     }
     else if (finalDealerScore > finalPlayerScore) {
       setMessage('Dealer wins.');
-      setBalance(balance - betAmount);
+      updateBalance(-betAmount);
     }
     else if (finalDealerScore < finalPlayerScore) {
       setMessage('You win!');
-      setBalance(balance + betAmount);
+      updateBalance(betAmount);
     }
     else {
       setMessage('It\'s a tie!');
@@ -226,6 +206,7 @@ function Blackjack({ toggleOverview }) {
           hand={dealerHand}
           score={dealerScore}
           player="dealer"
+          isPlayerTurnActive={isPlayerTurnActive}
         />
         {message && <p className={styles.message}>{message}</p>}
         <HandDisplay
