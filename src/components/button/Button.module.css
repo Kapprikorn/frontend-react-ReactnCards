@@ -40,11 +40,11 @@
 }
 
 .buttonWrapper.darkGray {
-  background-color: #2A3E4A;
+  background-color: #1a2e39;
   color: #BECCE8;
 
   &:disabled {
-    background-color: #192227;
+    background-color: #2A3E4A;
   }
 }
 

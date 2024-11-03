@@ -4,9 +4,9 @@ import GameBettingView from '../../components/gameBettingView/GameBettingView.js
 import Button from '../../components/button/Button.jsx';
 import useCards from '../../hooks/useCards.js';
 import { usePlayer } from '../../hooks/usePlayer.js';
-import getCardValue from '../../helpers/blackjackScoreTable.js';
 import { useCardContext } from '../../hooks/useCardContext.js';
 import HandDisplay from '../../components/handDisplay/HandDisplay.jsx';
+import calculateHandScore from '../../helpers/calculateHandScore.js';
 
 function Blackjack({ toggleOverview }) {
   const { getCards } = useCards();
@@ -74,7 +74,7 @@ function Blackjack({ toggleOverview }) {
 
   const calculateScores = () => {
     const playerScore = calculateHandScore(playerHand);
-    const dealerScore = calculateHandScore(dealerHand);
+    const dealerScore = calculateHandScore(dealerHand, true, isPlayerTurnActive);
 
     setPlayerScore(playerScore);
     setDealerScore(dealerScore);
@@ -101,27 +101,6 @@ function Blackjack({ toggleOverview }) {
       setMessage("Dealer has 21! You lose.");
       updateBalance(-betAmount);
     }
-  };
-
-  const calculateHandScore = (hand) => {
-    let score = 0;
-    let aceCount = 0;
-
-    hand.forEach(card => {
-      let value = getCardValue(card);
-      if (value === 1) {
-        aceCount += 1;
-        value = 11;
-      }
-      score += value;
-    });
-
-    while (aceCount > 0 && score > 21) {
-      score -= 10;
-      aceCount -= 1;
-    }
-
-    return score;
   };
 
   const hit = async () => {
@@ -227,6 +206,7 @@ function Blackjack({ toggleOverview }) {
           hand={dealerHand}
           score={dealerScore}
           player="dealer"
+          isPlayerTurnActive={isPlayerTurnActive}
         />
         {message && <p className={styles.message}>{message}</p>}
         <HandDisplay
