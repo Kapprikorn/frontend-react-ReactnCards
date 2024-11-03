@@ -19,12 +19,12 @@ Welcome to my application. In this app users can play a total of two card games.
 
 ### HiLo
 
-Users can play the classic cardgame Hi Lo, which let's them wager if the next card will be higher or lower than the current one.
+Users can play the classic card game Hi Lo, which lets them wager if the next card will be higher or lower than the current one.
 
 ### Blackjack
 
-Users can play the popular cardgame Blackjack, trying to beat the dealer at getting to 21.
-But beware of getting over 21 or you'll bust and lose.
+Users can play the popular card game Blackjack, trying to beat the dealer at getting to 21.
+But beware of getting over 21 or you will bust and lose.
 
 ### History
 
