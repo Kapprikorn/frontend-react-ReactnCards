@@ -98,6 +98,9 @@ function HiLo({ toggleOverview }) {
           </div>
           <div className={styles.playingCardWrapper}>
             <CardDisplay card={card} loading={loading} error={error} />
+            {
+              message && <p>{message}</p>
+            }
           </div>
           <div className={styles.cardPreviewWrapper}>
             <div className={styles.playingCardPreview}>
@@ -107,9 +110,6 @@ function HiLo({ toggleOverview }) {
             <p>Ace being the lowest</p>
           </div>
         </div>
-        {
-          message && <p>{message}</p>
-        }
       </article>
       <Button
         text="i"
