@@ -15,7 +15,6 @@ export const CardProvider = ({ children }) => {
   };
 
   const addBlackjackCard = (newCard) => {
-    console.log(newCard);
     setBlackjackCards((prevCards) => [...prevCards, newCard]);
   };
 

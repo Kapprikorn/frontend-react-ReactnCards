@@ -27,19 +27,27 @@ const useCards = () => {
     setLoading(true);
     try {
       const result = await axios.get(`https://www.deckofcardsapi.com/api/deck/${currentDeck}/draw/?count=${count}`);
-      if (currentDeck === 'new') {
-        setCurrentDeck(result.data.deck_id);
-      } else if (result.data.remaining < 20) {
-        setCurrentDeck('new');
-      }
+
+      if (currentDeck === 'new') setCurrentDeck(result.data.deck_id);
+      if (result.data.remaining < 20) await _shuffleDeck();
+
       return result.data.cards;
-    } catch (error) {
-      console.error(error);
-      setError(error.message);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
+
+  const _shuffleDeck = async () => {
+    try {
+      return await axios.get(`https://www.deckofcardsapi.com/api/deck/${currentDeck}/shuffle/`);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    }
+  }
 
   return { card, getCard, getCards, loading, error };
 }
