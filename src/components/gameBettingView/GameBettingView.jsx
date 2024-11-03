@@ -1,8 +1,9 @@
 import styles from './GameBettingView.module.css';
 import Button from '../button/Button.jsx';
+import { usePlayer} from '../../hooks/usePlayer.js';
 
 function GameBettingView({ children, betAmount, setBetAmount, isGameActive, startGame }) {
-  const playerCredits = 10000;
+  const { balance } = usePlayer();
 
   const doubleBet = () => {
     setBetAmount(betAmount * 2);
@@ -18,14 +19,14 @@ function GameBettingView({ children, betAmount, setBetAmount, isGameActive, star
       <div className={styles.playerCreditsWrapper}>
         <p>Total Credits</p>
         <div className={styles.playerCredits}>
-          {playerCredits}
+          {balance}
         </div>
       </div>
       {children}
       <div className={styles.bettingWrapper}>
         <Button
           text="Bet"
-          disabled={isGameActive}
+          disabled={isGameActive || betAmount > balance}
           className={styles.betButton}
           handleClick={startGame} />
         <div className={styles.betInputWrapper}>
