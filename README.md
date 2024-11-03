@@ -16,7 +16,6 @@ Welcome to my application. In this app users can play a total of two card games.
    - [Building for Production](#building-for-production)
    - [Linting and Formatting](#linting-and-formatting)
 - [Test account](#test-account)
-- [Acknowledgements](#acknowledgements)
 
 ### HiLo
 
@@ -41,8 +40,8 @@ Follow these instructions to set up and run the project on your local machine.
 ### Prerequisites
 
 Make sure you have the following installed on your machine:
-- [Node.js](https://nodejs.org/) (LTS version recommended)
-- [npm](https://www.npmjs.com/) Node package manager or any other package manager (yarn, pnpm etc.)
+- Node.js — (LTS version recommended)
+- np — Node package manager or any other package manager (yarn, pnpm etc.)
 
 ## Installation
 
@@ -128,10 +127,3 @@ To test things out there is already a test account added to the database
 username: testUser
 password: testUser
 ```
-   
-### Acknowledgements
-
-- [NOVI Hogeschool](https://www.novi.nl)
-  - Specifically: [Nova Eeken](https://info.novi.nl/nl/overzicht-hoofddocenten-sme) and [Elwyn de Neve](https://info.novi.nl/nl/overzicht-hoofddocenten-sme)
-- [Vite](https://vitejs.dev/)
-- [React](https://reactjs.org/)
